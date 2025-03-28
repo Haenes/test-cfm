@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Справочник{% endblock %}
+
+{% block main %}
+    <ul>
+        <li><a href="{% url 'cfm:types' %}">Типы</a></li>
+        <li><a href="{% url 'cfm:statuses' %}">Статусы</a></li>
+        <li><a href="{% url 'cfm:categories' %}">Категории</a></li>
+        <li><a href="{% url 'cfm:subcategories' %}">Подкатегории</a></li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Список подкатегорий{% endblock %}
+
+{% block main %}
+    <a href="{% url 'cfm:add_subcategory' %}">Добавить</a>
+
+    {% if subcategories %}
+        <table>
+            <caption>
+                Таблица подкатегорий
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Категория</th>
+                    <th scope="col">Подкатегория</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subcategory in subcategories %}
+                    <tr>
+                        <th scope="row">
+                            <a href="{{ subcategory.get_absolute_url }}">{{ forloop.counter }}</a>
+                        </th>
+                        <td>{{ subcategory.category }}</td>
+                        <td>{{ subcategory.subcategory_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        У вас ещё нет подкатегорий.
+    {% endif %}
+{% endblock %}

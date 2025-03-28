@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block script %}<script async src="{% static 'cfm/script.js' %}"></script>{% endblock %}
+{% block title %}Изменить операцию{% endblock %}
+
+{% block main %}
+    <form
+        id="editOperationForm"
+        action="{% url 'cfm:edit_operation' operation.id %}"
+        data-category-url="{% url 'cfm:fetch_categories' %}"
+        data-subcategory-url="{% url 'cfm:fetch_subcategories' %}"
+        method="post"
+    >
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">Изменить</button>
+    </form>
+
+    <form id="deleteOperationForm" action="{% url 'cfm:delete_operation' operation.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+{% endblock %}

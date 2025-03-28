@@ -1,0 +1,56 @@
+services:
+
+  app:
+    container_name: app
+    build: .
+    entrypoint: sh ./entrypoint.sh
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    container_name: db
+    image: postgres:17.4-alpine
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+        reservations:
+          memory: 50M
+    volumes:
+        - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U$$POSTGRES_USER -d$$POSTGRES_DB"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    container_name: redis
+    image: redis:7.4.2-alpine
+    env_file:
+      - .env
+    volumes:
+       - redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+    db-data:
+    redis-data:

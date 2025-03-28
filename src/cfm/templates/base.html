@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'cfm/style.css' %}">
+        {% block script %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}Cash Flow Manager{% endblock %}
+        </title>
+    </head>
+
+    <body>
+        <nav>
+            <a href="{% url 'cfm:operations' %}">Операции</a>
+            <a href="{% url 'cfm:handbook' %}">Справочник</a>
+        </nav>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+    </body>
+</html>

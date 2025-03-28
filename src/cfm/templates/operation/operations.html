@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Список операций{% endblock %}
+
+{% block main %}
+    <a href="{% url 'cfm:add_operation' %}">Добавить</a>
+
+    {% if operations %}
+        <table>
+            <caption>
+                Таблица ваших операций
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Создана</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Категория</th>
+                    <th scope="col">Подкатегория</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col">Комментарий</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for operation in operations %}
+                    <tr>
+                        <th scope="row">
+                            <a href="{{ operation.get_absolute_url }}">{{ forloop.counter }}</a>
+                        </th>
+                        <td>{{ operation.created_at }}</td>
+                        <td>{{ operation.status }}</td>
+                        <td>{{ operation.type }}</td>
+                        <td>{{ operation.category }}</td>
+                        <td>{{ operation.subcategory }}</td>
+                        <td>{{ operation.total }}</td>
+                        <td>{{ operation.comment|truncatewords:7 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        У вас ещё нет операций.
+    {% endif %}
+
+    
+{% endblock %}

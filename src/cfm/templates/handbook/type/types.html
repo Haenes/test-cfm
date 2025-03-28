@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Список типов{% endblock %}
+
+{% block main %}
+    <a href="{% url 'cfm:add_type' %}">Добавить</a>
+    <ul>
+        {% for type in types %}
+        <li><a href="{{ type.get_absolute_url }}">{{ type.type_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

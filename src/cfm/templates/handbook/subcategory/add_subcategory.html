@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить новую подкатегорию{% endblock %}
+
+{% block main %}
+    <form id="newOperationSubCategoryForm" action="{% url 'cfm:add_subcategory' %}" method="post">
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit">Добавить</button>
+    </form>
+{% endblock %}

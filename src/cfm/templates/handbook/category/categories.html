@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Список категорий{% endblock %}
+
+{% block main %}
+    <a href="{% url 'cfm:add_category' %}">Добавить</a>
+
+    {% if categories %}
+        <table>
+            <caption>
+                Таблица категорий
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Категория</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <th scope="row">
+                            <a href="{{ category.get_absolute_url }}">{{ forloop.counter }}</a>
+                        </th>
+                        <td>{{ category.type }}</td>
+                        <td>{{ category.category_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        У вас ещё нет категорий.
+    {% endif %}
+{% endblock %}

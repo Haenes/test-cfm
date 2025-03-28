@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Список статусов{% endblock %}
+
+{% block main %}
+    <a href="{% url 'cfm:add_status' %}">Добавить</a>
+    <ul>
+        {% for status in statuses %}
+        <li><a href="{{ status.get_absolute_url }}">{{ status.status_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Изменить тип{% endblock %}
+
+{% block main %}
+    <form id="editOperationTypeForm" action="{% url 'cfm:edit_type' type.id %}" method="post">
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit">Изменить</button>
+    </form>
+
+    <form id="deleteOperationTypeForm" action="{% url 'cfm:delete_type' type.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+{% endblock %}

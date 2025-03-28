@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Изменить статус{% endblock %}
+
+{% block main %}
+    <form id="editOperationStatusForm" action="{% url 'cfm:edit_status' status.id %}" method="post">
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit">Изменить</button>
+    </form>
+
+    <form id="deleteOperationStatusForm" action="{% url 'cfm:delete_status' status.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+{% endblock %}

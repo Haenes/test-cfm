@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block script %}<script async src="{% static 'cfm/script.js' %}"></script>{% endblock %}
+{% block title %}Добавить новую операцию{% endblock %}
+
+{% block main %}
+    <form
+        id="newOperationForm"
+        action="{% url 'cfm:add_operation' %}"
+        data-category-url="{% url 'cfm:fetch_categories' %}"
+        data-subcategory-url="{% url 'cfm:fetch_subcategories' %}"
+        method="post"
+    >
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">Добавить</button>
+    </form>
+{% endblock %}
